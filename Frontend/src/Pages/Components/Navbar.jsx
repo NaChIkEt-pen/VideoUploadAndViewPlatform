@@ -6,7 +6,7 @@ import "../../CSS/HomePageCSS/HomePageNavbar.css";
 export default function () {
   return (
     <>
-      <Navbar bg="white" data-bs-theme="dark" sticky="top">
+      <Navbar bg="#0F0F0F" data-bs-theme="dark" sticky="top">
         {/* changed background color and sticky on top*/}
         <Container className="NavContainer">
           <Navbar.Brand href="#home">
