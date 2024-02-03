@@ -1,9 +1,32 @@
 .NavContainer{
     margin-left: 2.5%;
+    margin-right: 0;
+    width: auto
 }
 .IconText{
+    margin-top: 100px;
     margin-left: 5%;
 }
 .TMText{
     margin-left: 2%;
+}
+.searchBarDiv{
+    margin-left: 10%;
+    width: auto;
+}
+.searchBarText{
+    width: 40vw;
+
+}
+.searchBarTextCol{
+    padding-right: 0;
+}
+.searchBarBtnCol{
+    padding-left: 0;
+}
+.searchBarSeaButton{
+    background-color: #222222;
+    border-color : black;
+    border-left: 0px;   
+
 }
