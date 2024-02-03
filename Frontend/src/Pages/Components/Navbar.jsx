@@ -49,9 +49,9 @@ export default function () {
           </Row>
         </Form>
         <div>
-          {/* <Button type="submit" className="navbarVideoAddButton">
+          <Button type="submit" className="navbarVideoAddButton">
             <AiOutlineVideoCameraAdd />
-          </Button> */}
+          </Button>
         </div>
       </Navbar>
     </>
