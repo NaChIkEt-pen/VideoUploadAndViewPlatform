@@ -3,6 +3,10 @@
     margin-right: 0;
     width: auto
 }
+.Icon{
+    width: 40px;
+    height: 40px;
+}
 .IconText{
     margin-top: 100px;
     margin-left: 5%;
@@ -27,6 +31,17 @@
 .searchBarSeaButton{
     background-color: #222222;
     border-color : black;
-    border-left: 0px;   
-
+    border-left: 0px;
+}
+.navbarAdditionalsDiv{
+    margin-left: 20%;
+}
+.navbarVideoAddButton{
+    background-color: #0F0F0F;
+    border: none;
+    size:"50"
+}
+.navbarUserIcon{
+    width: 35px;
+    height: 35px;
 }

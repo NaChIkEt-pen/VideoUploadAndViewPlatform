@@ -21,7 +21,7 @@ export default function () {
         {/* changed background color and sticky on top*/}
         <Container className="NavContainer">
           <Navbar.Brand href="#home">
-            <img src="../../video (1).png" alt="Icon" />
+            <img src="../../video (1).png" alt="Icon" className="Icon" />
             {/* png is from public folder */}
             <span className="IconText">MyTube</span>
             {/* <span className="TMText">™</span> */}
@@ -48,10 +48,21 @@ export default function () {
             </Col>
           </Row>
         </Form>
-        <div>
-          <Button type="submit" className="navbarVideoAddButton">
-            <AiOutlineVideoCameraAdd />
-          </Button>
+        <div className="navbarAdditionalsDiv">
+          <Row>
+            <Col className="navbarVideoAddButtonCol">
+              <Button type="submit" className="navbarVideoAddButton">
+                <AiOutlineVideoCameraAdd />
+                {/* value={{ size: "4em" }} */}
+              </Button>
+            </Col>
+            <Col>
+              <img
+                src="../../../public/profile.png"
+                className="navbarUserIcon"
+              />
+            </Col>
+          </Row>
         </div>
       </Navbar>
     </>
