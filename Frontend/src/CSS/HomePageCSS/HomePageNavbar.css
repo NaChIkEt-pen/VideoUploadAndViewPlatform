@@ -1,3 +1,6 @@
+.NavbarDiv{
+    background-color: #0F0F0F;
+}
 .NavContainer{
     margin-left: 2.5%;
     margin-right: 0;
@@ -38,8 +41,11 @@
 }
 .navbarVideoAddButton{
     background-color: #0F0F0F;
-    border: none;
-    size:"50"
+    border: #0F0F0F;
+    border-radius: 75%;
+}
+.navbarVideoAddButton:hover{
+    background-color: #a4a4a45e;
 }
 .navbarUserIcon{
     width: 35px;

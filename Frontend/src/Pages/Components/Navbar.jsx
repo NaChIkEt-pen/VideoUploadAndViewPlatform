@@ -11,13 +11,19 @@ import Col from "react-bootstrap/Col";
 // icons
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
+import { IconContext } from "react-icons";
 
 // CSS
 import "../../CSS/HomePageCSS/HomePageNavbar.css";
 export default function () {
   return (
     <>
-      <Navbar bg="#0F0F0F" data-bs-theme="dark" sticky="top">
+      <Navbar
+        bg="#0F0F0F"
+        data-bs-theme="dark"
+        sticky="top"
+        className="NavbarDiv"
+      >
         {/* changed background color and sticky on top*/}
         <Container className="NavContainer">
           <Navbar.Brand href="#home">
@@ -51,16 +57,17 @@ export default function () {
         <div className="navbarAdditionalsDiv">
           <Row>
             <Col className="navbarVideoAddButtonCol">
-              <Button type="submit" className="navbarVideoAddButton">
-                <AiOutlineVideoCameraAdd />
-                {/* value={{ size: "4em" }} */}
-              </Button>
+              <IconContext.Provider value={{ size: "1.45em" }}>
+                <div>
+                  <Button type="submit" className="navbarVideoAddButton">
+                    <AiOutlineVideoCameraAdd values={{ size: "1em" }} />
+                    {/* value={{ size: "4em" }} */}
+                  </Button>
+                </div>
+              </IconContext.Provider>
             </Col>
             <Col>
-              <img
-                src="../../../public/profile.png"
-                className="navbarUserIcon"
-              />
+              <img src="../../../profile.png" className="navbarUserIcon" />
             </Col>
           </Row>
         </div>

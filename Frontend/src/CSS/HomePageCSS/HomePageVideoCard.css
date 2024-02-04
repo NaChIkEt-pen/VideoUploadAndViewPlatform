@@ -1,0 +1,18 @@
+.videoCardDiv{
+    margin: 5%
+    
+}
+.videoCardDiv{
+    border-radius: "10px";
+}
+.videoCardText{
+    display: flex;
+    flex-direction: column;
+}
+.videoTextFooter{
+    display: flex;
+    flex-direction: row;
+}
+.videoUploadTime{
+    margin-left: 1.5%;
+}

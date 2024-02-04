@@ -1,0 +1,6 @@
+.videoRendererDiv{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 50px 50px;
+    margin: 20px;
+}
