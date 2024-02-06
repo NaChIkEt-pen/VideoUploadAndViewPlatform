@@ -1,16 +1,22 @@
 import React from "react";
-import Navbar from "./Components/Navbar";
+import { userAuthAtom } from "../GlobalVars";
+import { useSetAtom } from "jotai/react";
+
+//css
+import "../CSS/HomePageCSS/HomePage.css";
+
+//components
+import HomePageNavbar from "./Components/Navbar";
 import VideoCard from "./Components/VideoCard";
 
-import "../CSS/HomePageCSS/HomePage.css";
 export default function HomePage() {
   return (
     <>
-      <Navbar />
+      <HomePageNavbar />
       <div className="videoRendererDiv">
+        {/* <VideoCard />
         <VideoCard />
-        <VideoCard />
-        <VideoCard />
+        <VideoCard /> */}
       </div>
     </>
   );

@@ -15,7 +15,11 @@ import { IconContext } from "react-icons";
 
 // CSS
 import "../../CSS/HomePageCSS/HomePageNavbar.css";
-export default function () {
+
+export default function HomePageNavbar() {
+  const handlePfpClick = () => {
+    console.log("hello");
+  };
   return (
     <>
       <Navbar
@@ -67,7 +71,12 @@ export default function () {
               </IconContext.Provider>
             </Col>
             <Col>
-              <img src="../../../profile.png" className="navbarUserIcon" />
+              <button
+                style={{ background: "none", border: "none" }}
+                onClick={handlePfpClick}
+              >
+                <img src="../../../profile.png" className="navbarUserIcon" />
+              </button>
             </Col>
           </Row>
         </div>
