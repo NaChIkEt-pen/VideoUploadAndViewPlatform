@@ -1,4 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+//bootstrap import
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -16,9 +19,22 @@ import { IconContext } from "react-icons";
 // CSS
 import "../../CSS/HomePageCSS/HomePageNavbar.css";
 
+//atom import
+import { userAuthAtom } from "../../GlobalVars";
+import { useAtom } from "jotai/react";
+
 export default function HomePageNavbar() {
-  const handlePfpClick = () => {
-    console.log("hello");
+  const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useAtom(userAuthAtom);
+  const handlePfpClick = (event) => {
+    event.preventDefault();
+    //console.log(isAuth);
+    if (!isAuth) {
+      //navigate("/account", { target: "_blank" });
+      window.open("/login", "_blank");
+    } else if (isAuth) {
+      window.open("/account", "_blank");
+    }
   };
   return (
     <>

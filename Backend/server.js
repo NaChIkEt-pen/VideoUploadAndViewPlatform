@@ -45,6 +45,7 @@ app.get('/userdata/:id', async (req, res) => { // get api for userdata
   }
 })
 
-app.listen(3000, () => {
+const PORT = process.env.PORT; //mongodb pass in .env
+app.listen(PORT, () => {
   console.log('Server Started')
 })
