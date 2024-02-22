@@ -30,10 +30,10 @@ const userDataSchema = new mongoose.Schema({ // user data schema
 })
 
 
-app.get('/userdata/:id', async (req, res) => { // get api for userdata
+app.get('/userlogindata', async (req, res) => { // get api for userdata
   console.log(req.params.id);
   try {
-    const userData = mongoose.model("user", userDataSchema);
+    const userData = mongoose.model("userlogindata", userDataSchema);
     const data = await userData.find()
     // data.forEach((element,index) => {
     //   console.log(element)
