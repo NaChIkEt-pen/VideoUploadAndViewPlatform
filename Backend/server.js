@@ -19,7 +19,11 @@ db.on('error', (error) => console.error(error)) //
 db.once('open', () => console.log('Connected to db'))// one time check
 
 const userDataSchema = new mongoose.Schema({ // user data schema 
-  userName: {
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
     type: String,
     required: true
   },
@@ -31,7 +35,6 @@ const userDataSchema = new mongoose.Schema({ // user data schema
 
 
 app.get('/userlogindata', async (req, res) => { // get api for userdata
-  console.log(req.params.id);
   try {
     const userData = mongoose.model("userlogindata", userDataSchema);
     const data = await userData.find()
@@ -45,6 +48,23 @@ app.get('/userlogindata', async (req, res) => { // get api for userdata
   }
 })
 
+app.post('/insert/userlogindata', async (req, res) => {
+  const Data = mongoose.model("userlogindata", userDataSchema);
+  const data = new Data({
+  "email": req.body.email,
+  "name": req.body.name,
+  "password": req.body.password,
+  })  
+  
+  //console.log(data)
+  try {
+    const val = await data.save();
+    res.json(val)
+  } catch(error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+})
 const PORT = process.env.PORT; //mongodb pass in .env
 app.listen(PORT, () => {
   console.log('Server Started')

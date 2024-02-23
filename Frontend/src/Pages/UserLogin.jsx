@@ -27,6 +27,7 @@ export default function UserLogin() {
       if (element.userName == email && element.password == password) {
         // console.log(isAuth);
         setIsAuth(true);
+        window.open("/account", "_blank");
         //console.log(isAuth);
       } else if (element.userName == email && element.password != password) {
         setIsAuth(false);
