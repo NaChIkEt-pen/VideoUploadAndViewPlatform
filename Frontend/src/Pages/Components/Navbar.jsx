@@ -26,11 +26,20 @@ import { useAtom } from "jotai/react";
 export default function HomePageNavbar() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useAtom(userAuthAtom);
+
+  //funcitons
+  const handleVideoUploadButton = (event) => {
+    event.preventDefault();
+    if (isAuth) {
+      navigate("/videoupload", { replace: true });
+    } else {
+      navigate("/login", { replace: true });
+    }
+  };
+
   const handlePfpClick = (event) => {
     event.preventDefault();
-    //console.log(isAuth);
     if (!isAuth) {
-      //navigate("/account", { target: "_blank" });
       navigate("/login", { replace: true });
     } else if (isAuth) {
       navigate("/account", { replace: true });
@@ -79,10 +88,13 @@ export default function HomePageNavbar() {
             <Col className="navbarVideoAddButtonCol">
               <IconContext.Provider value={{ size: "1.45em" }}>
                 <div>
-                  <Button type="submit" className="navbarVideoAddButton">
+                  <button
+                    type="submit"
+                    className="navbarVideoAddButton"
+                    onClick={handleVideoUploadButton}
+                  >
                     <AiOutlineVideoCameraAdd values={{ size: "1em" }} />
-                    {/* value={{ size: "4em" }} */}
-                  </Button>
+                  </button>
                 </div>
               </IconContext.Provider>
             </Col>

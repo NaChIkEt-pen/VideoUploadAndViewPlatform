@@ -22,32 +22,9 @@
     margin-left: 2%;
 }
 
-.searchBarDiv {
-    margin-left: 10%;
-    width: auto;
-}
 
-.searchBarText {
-    width: 40vw;
-
-}
-
-.searchBarTextCol {
-    padding-right: 0;
-}
-
-.searchBarBtnCol {
-    padding-left: 0;
-}
-
-.searchBarSeaButton {
-    background-color: #222222;
-    border-color: black;
-    border-left: 0px;
-}
-
-.navbarAdditionalsDiv {
-    margin-left: 20%;
+.navbarAdditionalsDiv1 {
+    margin-left: 75%;
 }
 
 .navbarVideoAddButton {
