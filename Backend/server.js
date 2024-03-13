@@ -9,6 +9,7 @@ require('dotenv').config()
 app.use(express.json())
 app.use(cors())
 
+//MONGO AND ROUTES
 const MongoPass = process.env.MONGO_PASSWORD; //mongodb pass in .env
 mongoose.connect(`mongodb+srv://nachiketpensalwar:${MongoPass}@mymongo.mgg14we.mongodb.net/MyTube`); // connecting the mongo db
 mongoose.pluralize(null); // as mongodb adds a s in the ends that.
@@ -38,10 +39,6 @@ app.get('/userlogindata', async (req, res) => { // get api for userdata
   try {
     const userData = mongoose.model("userlogindata", userDataSchema);
     const data = await userData.find()
-    // data.forEach((element,index) => {
-    //   console.log(element)
-    //   console.log(index)
-    // })
     res.json(data)
   } catch {
     res.status(500).json({ message: err.message })

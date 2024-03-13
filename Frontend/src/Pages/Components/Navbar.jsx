@@ -31,9 +31,9 @@ export default function HomePageNavbar() {
     //console.log(isAuth);
     if (!isAuth) {
       //navigate("/account", { target: "_blank" });
-      window.open("/login", "_blank");
+      navigate("/login", { replace: true });
     } else if (isAuth) {
-      window.open("/account", "_blank");
+      navigate("/account", { replace: true });
     }
   };
   return (

@@ -24,17 +24,16 @@ export default function UserLogin() {
   };
   const isAuthFunction = async () => {
     userlogindata.forEach((element) => {
-      if (element.userName == email && element.password == password) {
-        // console.log(isAuth);
+      //console.log(element)
+      if (element.email == email && element.password == password) {
+        //console.log(isAuth);
         setIsAuth(true);
-        window.open("/account", "_blank");
+        navigate("/account", { replace: true });
         //console.log(isAuth);
       } else if (element.userName == email && element.password != password) {
         setIsAuth(false);
-        alert("Password is not correct");
       } else {
         setIsAuth(false);
-        alert("User do not exits");
       }
     });
   };
@@ -42,8 +41,8 @@ export default function UserLogin() {
     fetchLoginData();
   }, []);
   const onLoginButtonClick = async () => {
-    // console.log(email);
-    // console.log(password);
+    console.log(email);
+    console.log(password);
     await isAuthFunction();
   };
   const onRegisterClick = () => {
@@ -71,6 +70,7 @@ export default function UserLogin() {
           placeholder="Enter your password here"
           onChange={(ev) => setPassword(ev.target.value)}
           className={"inputBox"}
+          type="password"
         />
       </div>
       <br />
