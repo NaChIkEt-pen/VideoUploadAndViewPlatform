@@ -1,0 +1,38 @@
+.userAccountMainDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.viewsGraphDiv {
+    width: 40vw;
+    height: 70vh;
+    border: 2px solid white;
+    margin: 10vh 7vw;
+}
+
+.viewsGraphDiv>p {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.videoUploadMainDiv {
+    width: 40vw;
+    height: 70vh;
+    border: 2px solid white;
+    margin: 10vh 7vw;
+}
+
+.videoUploadDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.fileUploadDiv {
+    padding-top: 10px;
+    padding-left: 180px;
+}
+
+.uploadButtonDiv {
+    padding-top: 310px;
+    padding-left: 220px;
+}

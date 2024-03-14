@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose');
 const cors = require("cors");
 const { BSON } = require('mongodb');
+const multer = require("multer");
 require('dotenv').config()
 
 
@@ -61,6 +62,25 @@ app.post('/insert/userlogindata', async (req, res) => {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
+})
+
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+
+const upload = multer({ storage });
+
+app.post('/upload-video/:userName', upload.single("video"), async (req, res) => {
+  const video = req.file;
+  console.log(video);
+  res.send("Video uploaded successfully!");
 })
 const PORT = process.env.PORT; //mongodb pass in .env
 app.listen(PORT, () => {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../CSS/UserLogin/UserLogin.css";
 
 //import global
-import { userAuthAtom } from "../GlobalVars";
+import { userAuthAtom, userAuthId } from "../GlobalVars";
 import { useAtom } from "jotai/react";
 
 export default function UserLogin() {
@@ -13,6 +13,7 @@ export default function UserLogin() {
   const [userlogindata, setUserLoginData] = useState([]);
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useAtom(userAuthAtom);
+  const [userName, setuserName] = useAtom(userAuthId);
   const fetchLoginData = async () => {
     try {
       const response = await fetch(`http://localhost:3000/userlogindata`);
@@ -28,6 +29,7 @@ export default function UserLogin() {
       if (element.email == email && element.password == password) {
         //console.log(isAuth);
         setIsAuth(true);
+        setuserName(email);
         navigate("/account", { replace: true });
         //console.log(isAuth);
       } else if (element.userName == email && element.password != password) {
@@ -41,8 +43,8 @@ export default function UserLogin() {
     fetchLoginData();
   }, []);
   const onLoginButtonClick = async () => {
-    console.log(email);
-    console.log(password);
+    // console.log(email);
+    // console.log(password);
     await isAuthFunction();
   };
   const onRegisterClick = () => {
