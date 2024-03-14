@@ -4,8 +4,11 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const { BSON } = require('mongodb');
 const multer = require("multer");
-require('dotenv').config()
 
+// const methodOverride = require("method-override")
+
+let gfs;
+require('dotenv').config()
 
 app.use(express.json())
 app.use(cors())
@@ -18,7 +21,33 @@ mongoose.pluralize(null); // as mongodb adds a s in the ends that.
 const db = mongoose.connection //connection variable
 
 db.on('error', (error) => console.error(error)) //
-db.once('open', () => console.log('Connected to db'))// one time check
+db.once('open', () => {
+  // gfs = Grid(db.db, mongoose.mongo);
+  // gfs.collection('uploads');
+  console.log('Connected to db')
+})// one time check
+
+// var storage = new GridFsStorage({
+//   url: `mongodb+srv://nachiketpensalwar:${MongoPass}@mymongo.mgg14we.mongodb.net/MyTube`,
+//   file: (req, file) => {
+//     return new Promise((resolve, reject) => {
+//       crypto.randomBytes(16, (err, buf) => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         const filename = buf.toString('hex') + path.extname(file.originalname);
+//         const fileInfo = {
+//           filename: filename,
+//           bucketName: 'uploads'
+//         };
+//         resolve(fileInfo);
+//       });
+//     });
+//   }
+// });
+// const upload = multer({ storage });
+
+
 
 const userDataSchema = new mongoose.Schema({ // user data schema 
   name: {
@@ -34,6 +63,11 @@ const userDataSchema = new mongoose.Schema({ // user data schema
     required: true
   }
 })
+
+const fileSchema = new mongoose.Schema({
+  filename: String,
+  data: Buffer
+});
 
 
 app.get('/userlogindata', async (req, res) => { // get api for userdata
@@ -65,7 +99,7 @@ app.post('/insert/userlogindata', async (req, res) => {
 })
 
 
-
+ /*//multer local store
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -73,14 +107,50 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
-})
+})*/
 
-const upload = multer({ storage });
+
+//multer buffer store
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage });
+const File = mongoose.model('VideoFile', fileSchema);
+
 
 app.post('/upload-video/:userName', upload.single("video"), async (req, res) => {
-  const video = req.file;
-  console.log(video);
-  res.send("Video uploaded successfully!");
+  // const video = req.file;
+  
+  // res.send("Video uploaded successfully!");
+  //console.log(req.file.originalname)
+  try {
+    const fileData = {
+      filename: req.file.originalname,
+      data: req.file.buffer
+    };
+    // Create a new document in MongoDB
+    await File.create(fileData);
+    
+    res.status(201).send('File uploaded successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
+app.get('/video-data/:userName/:videoId', async (req, res) => {
+  try {
+    const _id = req.params.videoId;
+    const file = await File.findById(_id);
+
+    if (!file) {
+      return res.status(404).send('File not found');
+    }
+
+    res.set('Content-Type', 'video/mp4'); // Set content type as MP4
+    res.send(file.data); // Send file data as response
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 })
 const PORT = process.env.PORT; //mongodb pass in .env
 app.listen(PORT, () => {
