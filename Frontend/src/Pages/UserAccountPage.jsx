@@ -13,10 +13,19 @@ import AccountPageNavbar from "./Components/AccountPageNavbar";
 export default function UserAccountPage() {
   const [isAuth, setIsAuth] = useAtom(userAuthAtom);
   const [userName, setuserName] = useAtom(userAuthId);
+  const [videoUrl, setVideoUrl] = useState("");
   const [video, setVideo] = useState(null);
 
   const handleChange = async (event) => {
     await setVideo(event.target.files[0]);
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setVideo(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -54,6 +63,16 @@ export default function UserAccountPage() {
                 type="file"
                 onChange={handleChange}
               />
+            </div>
+            <div>
+              {/* <video controls>
+                <source src={videoUrl} type="video/mp4" />
+              </video> */}
+              {video && (
+                <video controls src={video} className="videoRenderer">
+                  Your browser does not support the video tag.
+                </video>
+              )}
             </div>
             <br />
             <div className="uploadButtonDiv">

@@ -28,11 +28,18 @@
 }
 
 .fileUploadDiv {
-    padding-top: 10px;
-    padding-left: 180px;
+    display: block;
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
+
+.videoRenderer {
+    margin: 5px;
+    width: 450px;
+    height: 300px;
 }
 
 .uploadButtonDiv {
-    padding-top: 310px;
-    padding-left: 220px;
+    margin-bottom: 0px;
+    margin-left: 200px;
 }
