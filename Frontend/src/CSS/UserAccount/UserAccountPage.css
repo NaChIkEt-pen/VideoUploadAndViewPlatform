@@ -29,17 +29,22 @@
 
 .fileUploadDiv {
     display: block;
-    margin-left: 100px;
-    margin-bottom: 10px;
+    margin-left: 8.5vw;
+    margin-bottom: 1vh;
+}
+
+.videoRendererDiv {
+    width: 35vw;
+    height: 50vh;
+    margin: 0;
+    padding: 10px;
 }
 
 .videoRenderer {
-    margin: 5px;
     width: 450px;
     height: 300px;
 }
 
 .uploadButtonDiv {
-    margin-bottom: 0px;
     margin-left: 200px;
 }

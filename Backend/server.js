@@ -117,10 +117,7 @@ const File = mongoose.model('VideoFile', fileSchema);
 
 
 app.post('/upload-video/:userName', upload.single("video"), async (req, res) => {
-  // const video = req.file;
   
-  // res.send("Video uploaded successfully!");
-  //console.log(req.file.originalname)
   try {
     const fileData = {
       filename: req.file.originalname,
@@ -129,7 +126,7 @@ app.post('/upload-video/:userName', upload.single("video"), async (req, res) => 
     // Create a new document in MongoDB
     await File.create(fileData);
     
-    res.status(201).send('File uploaded successfully');
+    res.status(200).send('File uploaded successfully');
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

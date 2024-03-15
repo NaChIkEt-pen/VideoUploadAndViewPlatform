@@ -13,7 +13,6 @@ import AccountPageNavbar from "./Components/AccountPageNavbar";
 export default function UserAccountPage() {
   const [isAuth, setIsAuth] = useAtom(userAuthAtom);
   const [userName, setuserName] = useAtom(userAuthId);
-  const [videoUrl, setVideoUrl] = useState("");
   const [video, setVideo] = useState(null);
 
   const handleChange = async (event) => {
@@ -32,9 +31,9 @@ export default function UserAccountPage() {
     event.preventDefault();
 
     const uploadData = new FormData();
-    uploadData.append("video", video);
-    // console.log(formData);
-    // console.log(userName);
+    await uploadData.append("video", video);
+    //console.log(uploadData);
+    //console.log(userName);
     fetch(`http://localhost:3000/upload-video/${userName}`, {
       method: "POST",
       body: uploadData,
@@ -64,7 +63,7 @@ export default function UserAccountPage() {
                 onChange={handleChange}
               />
             </div>
-            <div>
+            <div className="videoRendererDiv">
               {/* <video controls>
                 <source src={videoUrl} type="video/mp4" />
               </video> */}
