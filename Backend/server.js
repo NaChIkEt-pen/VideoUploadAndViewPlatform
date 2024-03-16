@@ -117,10 +117,11 @@ const File = mongoose.model('VideoFile', fileSchema);
 
 
 app.post('/upload-video/:userName', upload.single("video"), async (req, res) => {
-  
   try {
+    let ID = Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
     const fileData = {
-      filename: req.file.originalname,
+      ID: ID,
+      filename: `${req.file.originalname+'-'+ID}`,
       data: req.file.buffer
     };
     // Create a new document in MongoDB
