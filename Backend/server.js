@@ -5,6 +5,7 @@ const cors = require("cors");
 const { BSON } = require('mongodb');
 const multer = require("multer");
 
+
 // const methodOverride = require("method-override")
 
 let gfs;
@@ -65,7 +66,9 @@ const userDataSchema = new mongoose.Schema({ // user data schema
 })
 
 const fileSchema = new mongoose.Schema({
+  ID: Number,
   filename: String,
+  uploaderName:String,
   data: Buffer
 });
 
@@ -116,12 +119,15 @@ const upload = multer({ storage: storage });
 const File = mongoose.model('VideoFile', fileSchema);
 
 
-app.post('/upload-video/:userName', upload.single("video"), async (req, res) => {
+app.post('/upload-video/:username/:filename', upload.single("video"), async (req, res) => {
+  console.log(req.params.filename);
+  console.log(req.params.username);
   try {
     let ID = Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
     const fileData = {
       ID: ID,
-      filename: `${req.file.originalname+'-'+ID}`,
+      fileName: `${req.params.filename + '-' + ID}`,
+      uploaderName:req.params.username,
       data: req.file.buffer
     };
     // Create a new document in MongoDB

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //global vars
 import { userAuthAtom, userAuthId } from "../GlobalVars";
@@ -11,17 +12,21 @@ import "../CSS/UserAccount/UserAccountPage.css";
 import AccountPageNavbar from "./Components/AccountPageNavbar";
 
 export default function UserAccountPage() {
+  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useAtom(userAuthAtom);
   const [userName, setuserName] = useAtom(userAuthId);
   const [video, setVideo] = useState(null);
+  const [render, setRender] = useState(null);
+  const [fileName, setFileName] = useState("");
 
   const handleChange = async (event) => {
     await setVideo(event.target.files[0]);
     const file = event.target.files[0];
+    setFileName(file.name);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setVideo(e.target.result);
+        setRender(e.target.result);
       };
       reader.readAsDataURL(file);
     }
@@ -29,12 +34,12 @@ export default function UserAccountPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const uploadData = new FormData();
     await uploadData.append("video", video);
-    //console.log(uploadData);
+    //console.log(fileName);
+    console.log(uploadData);
     //console.log(userName);
-    fetch(`http://localhost:3000/upload-video/${userName}`, {
+    fetch(`http://localhost:3000/upload-video/${userName}/${fileName}`, {
       method: "POST",
       body: uploadData,
     })
@@ -67,8 +72,8 @@ export default function UserAccountPage() {
               {/* <video controls>
                 <source src={videoUrl} type="video/mp4" />
               </video> */}
-              {video && (
-                <video controls src={video} className="videoRenderer">
+              {render && (
+                <video controls src={render} className="videoRenderer">
                   Your browser does not support the video tag.
                 </video>
               )}
@@ -86,5 +91,7 @@ export default function UserAccountPage() {
         </div>
       </>
     );
+  } else {
+    navigate("/login", { replace: true });
   }
 }
