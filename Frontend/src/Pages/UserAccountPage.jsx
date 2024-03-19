@@ -15,6 +15,8 @@ export default function UserAccountPage() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useAtom(userAuthAtom);
   const [userName, setuserName] = useAtom(userAuthId);
+
+  // POST usestates
   const [video, setVideo] = useState(null);
   const [render, setRender] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -51,6 +53,16 @@ export default function UserAccountPage() {
         console.error("Error:", error);
       });
   };
+  //GET usestates
+  const [videoData, setVideoData] = useState([]);
+
+  useEffect(() => {
+    // Make a GET request to fetch the MP4 file data
+    fetch("/")
+      .then((response) => response.arrayBuffer())
+      .then((data) => setVideoData(data))
+      .catch((error) => console.error("Error fetching video data:", error));
+  }, []);
   if (isAuth == true) {
     return (
       <>
@@ -89,6 +101,7 @@ export default function UserAccountPage() {
             </div>
           </div>
         </div>
+        <div className="userAccountUploadedVideos"></div>
       </>
     );
   } else {

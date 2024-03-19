@@ -67,7 +67,7 @@ const userDataSchema = new mongoose.Schema({ // user data schema
 
 const fileSchema = new mongoose.Schema({
   ID: Number,
-  filename: String,
+  fileName: String,
   uploaderName:String,
   data: Buffer
 });
@@ -120,13 +120,14 @@ const File = mongoose.model('VideoFile', fileSchema);
 
 
 app.post('/upload-video/:username/:filename', upload.single("video"), async (req, res) => {
-  console.log(req.params.filename);
-  console.log(req.params.username);
+  //console.log(req.params.filename);
+  //console.log(req.params.username);
   try {
     let ID = Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
+    const fileNameData = `${req.params.filename}-${ID}`;
     const fileData = {
       ID: ID,
-      fileName: `${req.params.filename + '-' + ID}`,
+      fileName: fileNameData,
       uploaderName:req.params.username,
       data: req.file.buffer
     };
@@ -140,17 +141,18 @@ app.post('/upload-video/:username/:filename', upload.single("video"), async (req
   }
 })
 
-app.get('/video-data/:userName/:videoId', async (req, res) => {
+app.get('/video-data/:uploadername', async (req, res) => {
   try {
-    const _id = req.params.videoId;
-    const file = await File.findById(_id);
-
+    const file = await File.find({uploaderName : {$eq:`${req.params.uploadername}`}});
+    
     if (!file) {
       return res.status(404).send('File not found');
     }
 
-    res.set('Content-Type', 'video/mp4'); // Set content type as MP4
-    res.send(file.data); // Send file data as response
+    //res.set('Content-Type', 'video/mp4'); // Set content type as MP4
+    const dataArray = file.map(file => file.ID);
+    //console.log(file[0].ID)
+    res.send(dataArray); // Send file data as response
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

@@ -1,1 +1,1 @@
-GET http://localhost:3000/userlogindata
+GET http://localhost:3000/video-data/nachiket
